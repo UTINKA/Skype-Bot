@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{870FF179-06BD-4AF8-A2D1-16E33FC00239}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SkypeBot</RootNamespace>
+    <AssemblyName>SkypeBot</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BasicCommand.cs" />
+    <Compile Include="CommandInvoker.cs" />
+    <Compile Include="Commands\Beer.cs" />
+    <Compile Include="Commands\DiceRolling\DiceParser.cs" />
+    <Compile Include="Commands\DiceRolling\DiceRoll.cs" />
+    <Compile Include="Commands\Ding.cs" />
+    <Compile Include="Commands\Emote.cs" />
+    <Compile Include="Commands\Help.cs" />
+    <Compile Include="Commands\DiceRolling\DiceRoller.cs" />
+    <Compile Include="Commands\Macros\Macro.cs" />
+    <Compile Include="Commands\Macros\MacroCommand.cs" />
+    <Compile Include="Commands\Macros\MacroStore.cs" />
+    <Compile Include="Commands\Macros\MacroTrigger.cs" />
+    <Compile Include="Commands\Macros\MacroRunner.cs" />
+    <Compile Include="Commands\Nicks\NickCommand.cs" />
+    <Compile Include="Commands\Nicks\NickStore.cs" />
+    <Compile Include="Commands\Nicks\WhoCommand.cs" />
+    <Compile Include="ITrigger.cs" />
+    <Compile Include="MatchType.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="QuitSignal.cs" />
+    <Compile Include="Commands\Grammar.cs" />
+    <Compile Include="Commands\Quit.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="Commands\Ping.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Commands\Spelling.cs" />
+    <Compile Include="Commands\Time.cs" />
+    <Compile Include="SkypeInterface.cs" />
+    <Compile Include="StartsWithTrigger.cs" />
+    <Compile Include="Writer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="SKYPE4COMLib">
+      <Guid>{03282B5D-B38F-469D-849A-09B0A7F4881B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
