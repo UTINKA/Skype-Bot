@@ -1,3 +1,13 @@
-*.suo
-bin
 obj
+bin
+*.user
+*.suo
+*.orig
+packages
+_ReSharper.*
+*.Resharper
+*.Cache
+*.cache
+~$*
+*~
+*.pidb
