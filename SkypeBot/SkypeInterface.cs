@@ -1,3 +1,4 @@
+using System.Configuration;
 using SKYPE4COMLib;
 
 namespace SkypeBot
@@ -12,7 +13,7 @@ namespace SkypeBot
             Skype = new Skype();
             Skype.Attach();
 
-            Chat = Skype.Chat["#isomnicron/$c09ef07e4f1de141"];
+            Chat = Skype.Chat[ConfigurationManager.AppSettings["chatname"]];
         }
     }
 }

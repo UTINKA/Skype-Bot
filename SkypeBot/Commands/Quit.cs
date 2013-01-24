@@ -1,4 +1,6 @@
-﻿namespace SkypeBot.Commands
+﻿using System.Configuration;
+
+namespace SkypeBot.Commands
 {
     public class Quit : BasicCommand
     {
@@ -13,7 +15,7 @@
 
         public override void Process(Message message)
         {
-            if(message.SenderId != "barry.dahlberg")
+            if(message.SenderId != ConfigurationManager.AppSettings["skypeadmin"])
             {
                 writer.Write(
                     "> Authenticating command...\n" +
