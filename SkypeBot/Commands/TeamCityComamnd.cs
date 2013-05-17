@@ -1,40 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Text;
-using TeamCitySharp;
-using TeamCitySharp.DomainEntities;
+﻿using System.Configuration;
+using SkypeBot.TeamCity;
 
 namespace SkypeBot.Commands
 {
     public class TeamCityComamnd : BasicCommand
     {
         private const string Token = "!tc";
-        private readonly TeamCityClient _client;
+
+        private readonly TeamCityService _teamCityService;
         private readonly Writer _writer;
 
         public TeamCityComamnd(Writer writer) : base(Token)
         {
             _writer = writer;
-            _client = new TeamCityClient(ConfigurationManager.AppSettings["teamcity-url"]);
-            _client.Connect(ConfigurationManager.AppSettings["teamcity-login"],
-                            ConfigurationManager.AppSettings["teamcity-password"]);
+            _teamCityService = new TeamCityService(ConfigurationManager.AppSettings["teamcity-url"],
+                                                   ConfigurationManager.AppSettings["teamcity-login"],
+                                                   ConfigurationManager.AppSettings["teamcity-password"]);
         }
 
         public override void Process(Message message)
         {
-            Console.WriteLine(message.Body);
             if (message.Body.Contains("status"))
             {
-                List<BuildConfig> buildConfigs = _client.AllBuildConfigs();
-                var sb = new StringBuilder();
-                foreach (BuildConfig buildConfig in buildConfigs)
-                {
-                    Build build = _client.LastBuildByBuildConfigId(buildConfig.Id);
-                    string status = build.Status == "FAILURE" ? "(devil)" : "";
-                    sb.AppendLine(buildConfig.Name + " " + build.Status + " " + status);
-                }
-                _writer.Write(sb.ToString());
+                string buildStatuses = _teamCityService.GetBuildStatuses();
+                _writer.Write(buildStatuses);
+            }
+
+            if (message.Body.Contains("add2queue"))
+            {
+                string buildName = message.Body.Replace(Token, string.Empty).Replace("add2queue", string.Empty).Trim();
+                _teamCityService.Add2Queue(buildName);
+                _writer.Write(buildName + "added to queue");
             }
         }
     }
